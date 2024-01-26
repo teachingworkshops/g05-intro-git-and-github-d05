@@ -1,7 +1,33 @@
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        System.out.println("Hi");
-        System.out.print("testing again");
+
+        int numOfPlayers = 0;
+        String[] names = new String[] { "", "", "", "" } ;
+
+        Scanner input = new Scanner( System.in ) ;
+        while ( numOfPlayers < 1 || numOfPlayers > 4 )
+            {
+            System.out.print( "HOW MANY PLAYERS(1-4 PLAYERS): " ) ;
+
+            numOfPlayers = input.nextInt() ;
+            if ( numOfPlayers > 4 || numOfPlayers < 1 )
+                {
+                System.out.println( "INVALID NUMBER OF PLAYERS(2-7 PLAYERS ALLOWED!)" ) ;
+                }
+            }
+        
+        for ( int i = 0 ; i < numOfPlayers ; i++ ){
+            System.out.print( "ENTER PLAYER " + ( i + 1 ) + " NAME: " ) ;
+            names[ i ] = input.next() ;
+            }
+        System.out.println() ;
+        /* we will code this in a new class
+        Player one = new Player( names[ 0 ] ) ;
+        Player two = new Player( names[ 1 ] ) ;
+        Player three = new Player( names[ 2 ] ) ;
+        Player four = new Player( names[ 3 ] ) ;
+        */
     }
 }
