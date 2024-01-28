@@ -23,11 +23,21 @@ public class App {
             names[ i ] = input.next() ;
             }
         System.out.println() ;
-        /* we will code this in a new class
+
         Player one = new Player( names[ 0 ] ) ;
         Player two = new Player( names[ 1 ] ) ;
         Player three = new Player( names[ 2 ] ) ;
         Player four = new Player( names[ 3 ] ) ;
-        */
+
+        Player[] players = {one, two, three, four};
+
+        for(int i = 0; i < players.length; i++)
+        {
+            if ( !players[ i ].getName().equals( "" ) )
+            {
+                
+            }
+        }
+        
     }
 }
