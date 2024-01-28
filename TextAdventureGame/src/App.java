@@ -44,6 +44,9 @@ public class App {
                 players[i].setPlayerRace(input.next());
                 players[i].displayPlayerStats();
                 System.out.println();
+
+                Game g = new Game(players);
+                g.printMap();
             }
         }
         
