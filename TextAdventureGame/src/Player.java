@@ -12,6 +12,7 @@ public class Player {
     private int stm = 10;
     private int mAtk = 0;
 
+    private String playerName;
     private String playerClass = "";
     private String playerRace = "Human";
 
@@ -21,7 +22,8 @@ public class Player {
      * Default constructor for the Player class.
      * Initializes the player with default attributes.
      */
-    public Player(){
+    public Player(String h){
+        this.playerName = h;
         this.max_Hp = 30;
         this.current_Hp = 30;
         this.atk = 10;
@@ -35,6 +37,10 @@ public class Player {
     }
 
     //_________Getter methods___________________________________________________
+    
+    public String getName(){
+        return this.playerName;
+    }
     public int getMax_Hp() {
         return max_Hp;
     }
@@ -122,7 +128,7 @@ public class Player {
      * Set the player's class and apply corresponding modifiers.
      * @param playerClass The player's class ("fighter", "wizard", "barbarian").
      */
-    public void setStat (String playerClass){
+    public void setClass (String playerClass){
         this.playerClass = playerClass;
         
         switch (playerClass.toLowerCase()) {
@@ -188,33 +194,34 @@ public class Player {
      * Display the player's statistics.
      * @param player The player whose stats are to be displayed.
      */
-    private static void displayPlayerStats(Player player) {
-        System.out.println("Player Class: " + player.getPlayerClass());
-        System.out.println("Player Race: " + player.getPlayerRace());
-        System.out.println("Max HP: " + player.getMax_Hp());
-        System.out.println("Current HP: " + player.getCurrent_Hp());
-        System.out.println("Attack: " + player.getAtk());
-        System.out.println("Defense: " + player.getDef());
-        System.out.println("Stamina: " + player.getStm());
-        System.out.println("Magic Attack: " + player.getmAtk());
-        System.out.println("Is Alive: " + player.isAlive());
+    public void displayPlayerStats() {
+        System.out.println("Player Name: " + this.getName());
+        System.out.println("Player Class: " + this.getPlayerClass());
+        System.out.println("Player Race: " + this.getPlayerRace());
+        System.out.println("Max HP: " + this.getMax_Hp());
+        System.out.println("Current HP: " + this.getCurrent_Hp());
+        System.out.println("Attack: " + this.getAtk());
+        System.out.println("Defense: " + this.getDef());
+        System.out.println("Stamina: " + this.getStm());
+        System.out.println("Magic Attack: " + this.getmAtk());
+        System.out.println("Is Alive: " + this.isAlive());
         System.out.println("-----------------------------");
     }
 
     //test
     public static void main(String[] args) {
         // Create a new player
-        Player player = new Player();
+        Player player = new Player("JOHN");
 
         // Display initial stats
-        displayPlayerStats(player);
+        player.displayPlayerStats();
 
         // Set player class to "wizard" and race to "elf"
-        player.setStat("wizard");
+        player.setClass("wizard");
         player.setPlayerRace("elf");
 
         // Display updated stats
-        displayPlayerStats(player);
+        player.displayPlayerStats();
     }
 
 }

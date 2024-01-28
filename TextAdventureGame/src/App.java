@@ -5,6 +5,7 @@ public class App {
 
         int numOfPlayers = 0;
         String[] names = new String[] { "", "", "", "" } ;
+        
 
         Scanner input = new Scanner( System.in ) ;
         while ( numOfPlayers < 1 || numOfPlayers > 4 )
@@ -14,7 +15,7 @@ public class App {
             numOfPlayers = input.nextInt() ;
             if ( numOfPlayers > 4 || numOfPlayers < 1 )
                 {
-                System.out.println( "INVALID NUMBER OF PLAYERS(2-7 PLAYERS ALLOWED!)" ) ;
+                System.out.println( "INVALID NUMBER OF PLAYERS(1-4 PLAYERS ALLOWED!)" ) ;
                 }
             }
         
@@ -35,7 +36,14 @@ public class App {
         {
             if ( !players[ i ].getName().equals( "" ) )
             {
-                
+                players[i].displayPlayerStats();
+                System.out.println("CHOOSE A CLASS(FIGHTER, WIZARD, BARBARIAN): ");
+                // Set player class to "wizard" and race to "elf"
+                players[i].setClass(input.next());
+                System.out.println("CHOOSE A RACE(ELF, DWARF, ORC): ");
+                players[i].setPlayerRace(input.next());
+                players[i].displayPlayerStats();
+                System.out.println();
             }
         }
         
