@@ -24,7 +24,6 @@ public class Room {
 
     private void createRoom(){
         randomRoomNum = r.nextInt(100);
-        System.out.println(randomRoomNum);
         if(randomRoomNum < 10){
             this.roomName = "Item Room"; //When using the look command in this room, you will gain an item
         }
