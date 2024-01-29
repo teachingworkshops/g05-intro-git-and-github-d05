@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Game {
 
     private Player[] players = {null, null, null, null}; //array of all players that we're passed by main
-    private String[][] coords = new String[5][5]; // for map and keeping track of old coordinates
-    private int rows = 5;
-    private int col = 5;
+    private String[][] coords = new String[7][7]; // for map and keeping track of old coordinates
+    private int rows = 7;
+    private int col = 7;
     private int x;
     private int y;
 
@@ -20,21 +20,21 @@ public class Game {
         for (int i = 0; i<rows; i++)
         for (int j = 0; j<col; j++)
         this.coords[i][j] = "0";
-        this.coords[2][2] = "W";
-        this.x = 2;
-        this.y = 2;
+        this.coords[col/2][rows/2] = "W";
+        this.x = col/2;
+        this.y = rows/2;
         
     }
 
     public void printMap(){
         System.out.println("0 = UNDISCOVERED     X = DISCOVERED     W = YOUR CURRENT LOCATION");
-        System.out.println("-----------------");
+        System.out.println();
         for (int i = 0; i<rows; i++) {
         for (int j = 0; j<col; j++) {
          System.out.print(coords[j][i] + "   ");
         }
         System.out.println();
-        System.out.println("-----------------");
+        System.out.println();
         }
     }
 
@@ -43,7 +43,7 @@ public class Game {
         String mov = " ";
 
         System.out.println("WHICH WAY WOULD YOU LIKE TO MOVE: ");
-        if(y != 4){
+        if(y != (rows - 1)){
             System.out.print("DOWN, ");
         }
         if(y != 0){
@@ -52,7 +52,7 @@ public class Game {
         if(x != 0){
             System.out.print("LEFT, ");
         }
-        if(x != 4){
+        if(x != (col - 1)){
             System.out.print("RIGHT: ");
         }    
         
@@ -67,7 +67,7 @@ public class Game {
         b = y;
         switch(move.toLowerCase()) {
             case "down":
-                if(y != 4){
+                if(y != (rows - 1)){
                     coords[a][b] = "X";
                     y++;
                     coords[x][y] = "W";
@@ -100,7 +100,7 @@ public class Game {
                 }
                 break;
             case "right":
-                if(x != 4){
+                if(x != (col - 1)){
                     coords[a][b] = "X";
                     x++;
                     coords[x][y] = "W";
