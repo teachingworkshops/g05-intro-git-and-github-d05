@@ -9,6 +9,13 @@ public class Game {
     private int col = 7;
     private int x;
     private int y;
+    
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_WHITE = "\u001B[37m";
+    private String currentLoc = ANSI_GREEN + "W" + ANSI_WHITE;
+    private String pastLoc = ANSI_BLUE + "X" + ANSI_WHITE;
 
     public Game(Player[] p){
         for(int i = 0; i < p.length; i++){
@@ -21,7 +28,7 @@ public class Game {
         for (int i = 0; i<rows; i++)
         for (int j = 0; j<col; j++)
         this.coords[i][j] = "0";
-        this.coords[col/2][rows/2] = "W";
+        this.coords[col/2][rows/2] = currentLoc;
         this.x = col/2;
         this.y = rows/2;
 
@@ -33,7 +40,7 @@ public class Game {
     }
 
     public void printMap(){
-        System.out.println("0 = UNDISCOVERED     X = DISCOVERED     W = YOUR CURRENT LOCATION");
+        System.out.println("0 = UNDISCOVERED     "+ pastLoc +" = DISCOVERED     "+ currentLoc +" = YOUR CURRENT LOCATION");
         System.out.println();
         for (int i = 0; i<rows; i++) {
         for (int j = 0; j<col; j++) {
@@ -74,9 +81,9 @@ public class Game {
         switch(move.toLowerCase()) {
             case "down":
                 if(y != (rows - 1)){
-                    coords[a][b] = "X";
+                    coords[a][b] = pastLoc;
                     y++;
-                    coords[x][y] = "W";
+                    coords[x][y] = currentLoc;
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
@@ -86,9 +93,9 @@ public class Game {
                 break;
             case "up":
                 if(y != 0){
-                    coords[a][b] = "X";
+                    coords[a][b] = pastLoc;
                     y--;
-                    coords[x][y] = "W";
+                    coords[x][y] = currentLoc;
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
@@ -98,9 +105,9 @@ public class Game {
                 break;
             case "left":
                 if(x != 0){
-                    coords[a][b] = "X";
+                    coords[a][b] = pastLoc;
                     x--;
-                    coords[x][y] = "W";
+                    coords[x][y] = currentLoc;
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
@@ -110,9 +117,9 @@ public class Game {
                 break;
             case "right":
                 if(x != (col - 1)){
-                    coords[a][b] = "X";
+                    coords[a][b] = pastLoc;
                     x++;
-                    coords[x][y] = "W";
+                    coords[x][y] = currentLoc;
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
@@ -127,7 +134,7 @@ public class Game {
     }
 
     public void look(){
-        System.out.println("You have discovered: " + roomMap[x][y].look());
+        roomMap[x][y].look();
     }
 
 
