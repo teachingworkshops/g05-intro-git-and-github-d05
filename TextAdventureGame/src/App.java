@@ -74,7 +74,7 @@ public class App {
                         g.printMap();
                         break;
                         case "look":
-                        //code here
+                        g.look();
                         break;
                     }
                 }while(x != 1 );

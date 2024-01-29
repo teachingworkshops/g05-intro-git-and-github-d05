@@ -4,6 +4,7 @@ public class Game {
 
     private Player[] players = {null, null, null, null}; //array of all players that we're passed by main
     private String[][] coords = new String[7][7]; // for map and keeping track of old coordinates
+    private Room[][] roomMap = new Room[7][7]; // map for all the rooms of the dungeon
     private int rows = 7;
     private int col = 7;
     private int x;
@@ -23,7 +24,12 @@ public class Game {
         this.coords[col/2][rows/2] = "W";
         this.x = col/2;
         this.y = rows/2;
-        
+
+        for (int i = 0; i<rows; i++){
+            for (int j = 0; j<col; j++){
+               this.roomMap[i][j] = new Room();
+            }
+        }        
     }
 
     public void printMap(){
@@ -71,6 +77,7 @@ public class Game {
                     coords[a][b] = "X";
                     y++;
                     coords[x][y] = "W";
+                    System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -82,6 +89,7 @@ public class Game {
                     coords[a][b] = "X";
                     y--;
                     coords[x][y] = "W";
+                    System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -93,6 +101,7 @@ public class Game {
                     coords[a][b] = "X";
                     x--;
                     coords[x][y] = "W";
+                    System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -104,6 +113,7 @@ public class Game {
                     coords[a][b] = "X";
                     x++;
                     coords[x][y] = "W";
+                    System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -114,6 +124,10 @@ public class Game {
                 System.out.println("INVALID MOVE: " + move);
                 move();
         }
+    }
+
+    public void look(){
+        System.out.println("You have discovered: " + roomMap[x][y].look());
     }
 
 
