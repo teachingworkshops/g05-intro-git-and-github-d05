@@ -44,8 +44,44 @@ public class App {
                 players[i].setPlayerRace(input.next());
                 players[i].displayPlayerStats();
                 System.out.println();
+
+                
+            }
+        }
+        Game g = new Game(players);
+        while(players[0].isAlive() || players[1].isAlive() || players[2].isAlive() || players[3].isAlive() ){
+            for(int j = 0; j%3 < players.length; j++){
+                if ( players[ j%3 ].getName().equals( "" ) ){
+                    continue;
+                }
+                System.out.println();
+                System.out.println("-----------------------------");
+                System.out.println( (players[ j%3 ].getName()).toUpperCase());
+
+                int x = 0;
+                do{
+                    System.out.println("WHAT WOULD YOU LIKE TO DO (MOVE, STATS, OR LOOK): ");
+                    String in = input.next();
+                    switch(in.toLowerCase()){
+                        case "move":
+                            g.move();
+                            x = 1;
+                            break;
+                        case "stats":
+                            players[j%3].displayPlayerStats();
+                            break;
+                        case "map":
+                        g.printMap();
+                        break;
+                        case "look":
+                        //code here
+                        break;
+                    }
+                }while(x != 1 );
+
             }
         }
         
     }
+
 }
