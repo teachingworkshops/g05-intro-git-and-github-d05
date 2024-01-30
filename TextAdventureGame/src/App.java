@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class App {
+
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_WHITE = "\u001B[37m";
     public static void main(String[] args) throws Exception {
 
         int numOfPlayers = 0;
@@ -10,12 +13,12 @@ public class App {
         Scanner input = new Scanner( System.in ) ;
         while ( numOfPlayers < 1 || numOfPlayers > 4 )
             {
-            System.out.print( "HOW MANY PLAYERS(1-4 PLAYERS): " ) ;
+            System.out.print( "HOW MANY PLAYERS("+ ANSI_RED +"1-4 PLAYERS"+ANSI_WHITE+"): " ) ;
 
             numOfPlayers = input.nextInt() ;
             if ( numOfPlayers > 4 || numOfPlayers < 1 )
                 {
-                System.out.println( "INVALID NUMBER OF PLAYERS(1-4 PLAYERS ALLOWED!)" ) ;
+                System.out.println( "INVALID NUMBER OF PLAYERS("+ANSI_RED+"1-4 PLAYERS ALLOWED!"+ANSI_WHITE+")" ) ;
                 }
             }
         
@@ -37,10 +40,10 @@ public class App {
             if ( !players[ i ].getName().equals( "" ) )
             {
                 players[i].displayPlayerStats();
-                System.out.println("CHOOSE A CLASS(FIGHTER, WIZARD, BARBARIAN): ");
+                System.out.println("CHOOSE A CLASS("+ANSI_RED+"FIGHTER, WIZARD, BARBARIAN"+ANSI_WHITE+"): ");
                 // Set player class to "wizard" and race to "elf"
                 players[i].setClass(input.next());
-                System.out.println("CHOOSE A RACE(ELF, DWARF, ORC): ");
+                System.out.println("CHOOSE A RACE("+ANSI_RED+"ELF, DWARF, ORC"+ANSI_WHITE+"): ");
                 players[i].setPlayerRace(input.next());
                 players[i].displayPlayerStats();
                 System.out.println();
@@ -60,7 +63,7 @@ public class App {
 
                 int x = 0;
                 do{
-                    System.out.println("WHAT WOULD YOU LIKE TO DO (MOVE, STATS, OR LOOK): ");
+                    System.out.println("WHAT WOULD YOU LIKE TO DO ("+ANSI_RED+"MOVE, STATS, STORAGE, OR LOOK"+ANSI_WHITE+"): ");
                     String in = input.next();
                     switch(in.toLowerCase()){
                         case "move":
@@ -73,8 +76,11 @@ public class App {
                         case "map":
                         g.printMap();
                         break;
+                        case "storage":
+                        //write code for storage
+                        break;
                         case "look":
-                        g.look();
+                        g.look(players[j%1]);
                         break;
                     }
                 }while(x != 1 );

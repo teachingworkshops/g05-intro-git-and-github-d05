@@ -18,6 +18,8 @@ public class Player {
 
     private boolean isAlive = true;
 
+    private Item[] inventory = new Item[10];
+
     /**
      * Default constructor for the Player class.
      * Initializes the player with default attributes.
@@ -64,6 +66,29 @@ public class Player {
     }
     public String getPlayerRace() {
         return playerRace;
+    }
+    public void addItems(Item item){
+        for(int i = 0; i < inventory.length; i++){
+            if(inventory[i] == null){
+                inventory[i] = item;
+                addMod(item);
+                break;
+            }
+        }
+    }
+
+    private void addMod(Item item){
+        switch(item.getName().toLowerCase()){
+            case "sword":
+                setAtk(item.getAmount());
+                break;
+            case "armor":
+                setDef(item.getAmount());
+                break;
+            case "boots":
+                setStm(item.getAmount());
+                break;
+        }
     }
 
     /**
