@@ -191,6 +191,28 @@ public class Player {
     }
 
     /**
+     * Sets current hp of enemy 
+     * Display damage taken and current health to console
+     * Also if defeated
+     * 
+     * @param amount damage vale taken
+     */ 
+    public void attack() {
+        System.out.println(playerName + " attacks for " + atk + " damage!");
+    }
+    //Plays text for hp 
+    public void takeDamage(int amount) {
+        current_Hp -= amount;
+        if (current_Hp <= 0) {
+            current_Hp = 0;
+            isAlive = false;
+            System.out.println(playerName + " has been defeated!");
+        } else {
+            System.out.println(playerName + " has " + current_Hp + " health remaining.");
+        }
+    }
+
+    /**
      * Display the player's statistics.
      * @param player The player whose stats are to be displayed.
      */
@@ -222,6 +244,7 @@ public class Player {
 
         // Display updated stats
         player.displayPlayerStats();
+
     }
 
 }
