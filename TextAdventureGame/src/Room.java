@@ -8,6 +8,7 @@ public class Room {
     private Random r = new Random();
     private int randomRoomNum;
     private boolean usedRoom = false;
+    private int counter = 0;
 
 
     public Room(){
@@ -18,27 +19,43 @@ public class Room {
         return this.currentRoomName;
     }
 
-    public void look(Player p){
+    public void look(Player[] p){
         if(currentRoomName != roomName){
             this.currentRoomName = this.roomName;
             System.out.println("You have discovered: " + getRoom());
         }
         if(usedRoom == false && currentRoomName == "Item Room"){
             usedRoom = true;
-            Item i = new Item();
-            p.addItems(i);
-            System.out.println("You have found: " + i.getName());
-            if(i.getName() != "Potion"){
-                System.out.println("Adding " + i.getAmount() + " to " + i.getMod());
+            for(int y = 0; y < p.length;y++){
+                if(p[ y ].getName().equals( "")){
+                    continue;
+                }
+                Item i = new Item();
+                p[y].addItems(i);
+                System.out.println(p[y].getName());
+                System.out.println("You have found: " + i.getName());
+                
+                if(i.getName() != "Potion"){
+                    System.out.println("Adding " + i.getAmount() + " to " + i.getMod());
+                    System.out.println();
+
+                }
+                else{
+                    System.out.println("Adding Potion to Inventory!");
+                }
             }
-            else{
-                System.out.println("Adding Potion to Inventory!");
-            }
+            
+            
             //gives player an item
         }
         else if(usedRoom == false && currentRoomName == "Campfire Room"){
             usedRoom = true;
-            p.setCurrent_Hp(10);
+            for(int x = 0; x < p.length;x++){
+                if(!(p[x].playerName == null)) {
+                    p[x].add_Hp(10);
+                }
+                
+            }
             //heals the player
         }
         else if(usedRoom == false && currentRoomName == "Prison Cell"){

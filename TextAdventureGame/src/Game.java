@@ -20,7 +20,7 @@ public class Game {
 
     public Game(Player[] p){
         for(int i = 0; i < p.length; i++){
-            if ( !p[ i ].getName().equals( "" ) ){
+            if ( !(p[ i ].getName() == null) ){
                 this.players[i] = p[i];
             }
             
@@ -134,7 +134,7 @@ public class Game {
         }
     }
 
-    public void look(Player p){
+    public void look(Player[] p){
         roomMap[x][y].look(p);
     }
 

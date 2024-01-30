@@ -7,7 +7,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         int numOfPlayers = 0;
-        String[] names = new String[] { "", "", "", "" } ;
+        String[] names = new String[] { null, null, null, null } ;
         
 
         Scanner input = new Scanner( System.in ) ;
@@ -37,7 +37,7 @@ public class App {
 
         for(int i = 0; i < players.length; i++)
         {
-            if ( !players[ i ].getName().equals( "" ) )
+            if ( !(players[ i ].getName() == null) )
             {
                 players[i].displayPlayerStats();
                 System.out.println("CHOOSE A CLASS("+ANSI_RED+"FIGHTER, WIZARD, BARBARIAN"+ANSI_WHITE+"): ");
@@ -52,9 +52,12 @@ public class App {
             }
         }
         Game g = new Game(players);
-        while(players[0].isAlive() || players[1].isAlive() || players[2].isAlive() || players[3].isAlive() ){
-            for(int j = 0; j%3 < players.length; j++){
-                if ( players[ j%3 ].getName().equals( "" ) ){
+        while(players[0].isAlive() || players[1].isAlive() || players[2].isAlive() || players[3].isAlive() ){ //if at least one player is alive
+            for(int j = 0; j%3 < players.length; j++){  //loop through all the players
+                if ( !players[ j%3 ].isAlive() ){   //if the player isnt alive, change their name
+                    players[j%3].setName("");
+                }
+                if ( (players[ j%3 ].getName() == null) ) {  //if their name is empty, that means they never existed or they died, so we skip them
                     continue;
                 }
                 System.out.println();
@@ -63,25 +66,37 @@ public class App {
 
                 int x = 0;
                 do{
-                    System.out.println("WHAT WOULD YOU LIKE TO DO ("+ANSI_RED+"MOVE, STATS, STORAGE, OR LOOK"+ANSI_WHITE+"): ");
+                    System.out.println("WHAT WOULD YOU LIKE TO DO ("+ANSI_RED+"MOVE, STATS, STORAGE, DRINK, MAP, OR LOOK"+ANSI_WHITE+"): ");
                     String in = input.next();
                     switch(in.toLowerCase()){
                         case "move":
                             g.move();
                             x = 1;
                             break;
+
                         case "stats":
                             players[j%3].displayPlayerStats();
                             break;
+
                         case "map":
                         g.printMap();
                         break;
+
                         case "storage":
                         //write code for storage
+                        players[j%3].printInventory();
                         break;
+
                         case "look":
-                        g.look(players[j%1]);
+                        g.look(players);
                         break;
+
+                        case "drink":
+                        players[j%3].usePotion();
+                        break;
+
+                        default:
+                        System.out.println("INVALID INPUT,TRY AGAIN!");
                     }
                 }while(x != 1 );
 
