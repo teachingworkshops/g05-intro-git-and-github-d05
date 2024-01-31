@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.Random;
 public class Game {
 
     private Player[] players = {null, null, null, null}; //array of all players that we're passed by main
@@ -9,6 +9,7 @@ public class Game {
     private int col = 7;
     private int x;
     private int y;
+    private Random r = new Random();
     
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
@@ -87,6 +88,9 @@ public class Game {
                     coords[x][y] = currentLoc;
                     System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
+                    if(roomMap[x][y].hasEnemy){
+                        encounter();
+                    }
                 }else{
                     System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
@@ -99,6 +103,9 @@ public class Game {
                     coords[x][y] = currentLoc;
                     System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
+                    if(roomMap[x][y].hasEnemy){
+                        encounter();
+                    }
                 }else{
                     System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
@@ -111,6 +118,9 @@ public class Game {
                     coords[x][y] = currentLoc;
                     System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
+                    if(roomMap[x][y].hasEnemy){
+                        encounter();
+                    }
                 }else{
                     System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN");
                     move();
@@ -123,6 +133,9 @@ public class Game {
                     coords[x][y] = currentLoc;
                     System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
+                    if(roomMap[x][y].hasEnemy){
+                        encounter();
+                    }
                 }else{
                     System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
@@ -138,6 +151,19 @@ public class Game {
         roomMap[x][y].look(p);
     }
 
+    public void encounter(){
+        clearScreen();
+
+        Enemy x = new Enemy( r.nextInt(15));
+
+        System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
+        x.displayEnemyStats();
+    }
+
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+       }
 
 
 

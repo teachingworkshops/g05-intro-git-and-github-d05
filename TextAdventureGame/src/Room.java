@@ -9,6 +9,7 @@ public class Room {
     private Random r = new Random();
     private int randomRoomNum;
     private boolean usedRoom = false;
+    public boolean hasEnemy = false;
     private int counter = 0;
 
      Scanner input = new Scanner( System.in ) ;
@@ -100,6 +101,10 @@ public class Room {
 
     private void createRoom(){
         randomRoomNum = r.nextInt(100);
+        if(randomRoomNum%6 == 0){
+            hasEnemy = true;
+        }
+
         if(randomRoomNum < 20){
             this.roomName = "Item Room"; //When using the look command in this room, you will gain an item
         }

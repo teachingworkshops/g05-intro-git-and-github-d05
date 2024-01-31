@@ -118,7 +118,7 @@ public class Enemy {
                 this.atk = 20;
                 this.def = 10;
                 break;
-            case 15:
+            case 0:
                 this.name = "Cyclops";
                 this.max_Hp = 60;
                 this.current_Hp = 60;
@@ -168,6 +168,10 @@ public class Enemy {
     public void displayEnemyStats() {
         String text = String.format("%s [HP: %d/%d, ATK: %d, DEF: %d]", name, current_Hp, max_Hp, atk, def);
         System.out.println(text);
+    }
+
+    public String enemyName(){
+        return this.name;
     }
 
     //test
