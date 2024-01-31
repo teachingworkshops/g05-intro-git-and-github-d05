@@ -13,3 +13,6 @@ Overview:
 
 Objective:
 -As a party, your goal is to find the exit to the dungeon, however, along the way there are monsters blocking your path
+
+Run Instructions:
+-//TBD
