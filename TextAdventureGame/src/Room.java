@@ -27,7 +27,7 @@ public class Room {
         if(usedRoom == false && currentRoomName == "Item Room"){
             usedRoom = true;
             for(int y = 0; y < p.length;y++){
-                if(p[ y ].getName().equals( "")){
+                if(p[ y ].getName()== null){
                     continue;
                 }
                 Item i = new Item();
