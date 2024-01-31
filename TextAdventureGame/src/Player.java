@@ -195,7 +195,7 @@ public class Player {
      * Display damage taken and current health to console
      * Also if defeated
      * 
-     * @param amount damage vale taken
+     * @param amount damage value taken
      */ 
     public void attack() {
         System.out.println(playerName + " attacks for " + atk + " damage!");
