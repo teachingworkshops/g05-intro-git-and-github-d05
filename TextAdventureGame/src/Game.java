@@ -14,12 +14,13 @@ public class Game {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_WHITE = "\u001B[37m";
+    private static final String ANSI_YELLOW = "\u001B[36m";
     private String currentLoc = ANSI_GREEN + "W" + ANSI_WHITE;
     private String pastLoc = ANSI_BLUE + "X" + ANSI_WHITE;
 
     public Game(Player[] p){
         for(int i = 0; i < p.length; i++){
-            if ( !p[ i ].getName().equals( "" ) ){
+            if ( !(p[ i ].getName() == null) ){
                 this.players[i] = p[i];
             }
             
@@ -55,7 +56,7 @@ public class Game {
         Scanner in = new Scanner( System.in ) ;
         String mov = " ";
 
-        System.out.println("WHICH WAY WOULD YOU LIKE TO MOVE: ");
+        System.out.println(ANSI_YELLOW + "WHICH WAY WOULD YOU LIKE TO MOVE: ");
         if(y != (rows - 1)){
             System.out.print("DOWN, ");
         }
@@ -66,7 +67,7 @@ public class Game {
             System.out.print("LEFT, ");
         }
         if(x != (col - 1)){
-            System.out.print("RIGHT: ");
+            System.out.print("RIGHT: " + ANSI_WHITE);
         }    
         
         mov = in.next();
@@ -84,10 +85,10 @@ public class Game {
                     coords[a][b] = pastLoc;
                     y++;
                     coords[x][y] = currentLoc;
-                    System.out.println("Entering: " + roomMap[x][y].getRoom());
+                    System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
                 }else{
-                    System.out.println("OUT OF BOUNDS! TRY AGAIN" );
+                    System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
                 }
                 break;
@@ -96,10 +97,10 @@ public class Game {
                     coords[a][b] = pastLoc;
                     y--;
                     coords[x][y] = currentLoc;
-                    System.out.println("Entering: " + roomMap[x][y].getRoom());
+                    System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
                 }else{
-                    System.out.println("OUT OF BOUNDS! TRY AGAIN" );
+                    System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
                 }
                 break;
@@ -108,10 +109,10 @@ public class Game {
                     coords[a][b] = pastLoc;
                     x--;
                     coords[x][y] = currentLoc;
-                    System.out.println("Entering: " + roomMap[x][y].getRoom());
+                    System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
                 }else{
-                    System.out.println("OUT OF BOUNDS! TRY AGAIN" );
+                    System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN");
                     move();
                 }
                 break;
@@ -120,21 +121,21 @@ public class Game {
                     coords[a][b] = pastLoc;
                     x++;
                     coords[x][y] = currentLoc;
-                    System.out.println("Entering: " + roomMap[x][y].getRoom());
+                    System.out.println(ANSI_YELLOW + "Entering: " + ANSI_WHITE + roomMap[x][y].getRoom());
                     printMap();
                 }else{
-                    System.out.println("OUT OF BOUNDS! TRY AGAIN" );
+                    System.out.println(ANSI_YELLOW + "OUT OF BOUNDS! TRY AGAIN" );
                     move();
                 }
                 break;
             default:
-                System.out.println("INVALID MOVE: " + move);
+                System.out.println(ANSI_YELLOW + "INVALID MOVE: " + ANSI_WHITE + move);
                 move();
         }
     }
 
-    public void look(){
-        roomMap[x][y].look();
+    public void look(Player[] p){
+        roomMap[x][y].look(p);
     }
 
 

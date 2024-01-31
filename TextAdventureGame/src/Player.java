@@ -12,11 +12,14 @@ public class Player {
     private int stm = 10;
     private int mAtk = 0;
 
-    private String playerName;
+    public String playerName ;
     private String playerClass = "";
     private String playerRace = "Human";
 
-    private boolean isAlive = true;
+    private boolean isAlive = false;
+
+    public Item[] inventory = {null,null,null,null,null,null,null,null,null,null};
+    
 
     /**
      * Default constructor for the Player class.
@@ -33,8 +36,13 @@ public class Player {
 
         this.playerClass = ""; 
         this.playerRace = "Human";
+        if(this.playerName == null){
+            this.isAlive = false;
+        }
         this.isAlive = true;
     }
+
+    
 
     //_________Getter methods___________________________________________________
     
@@ -47,6 +55,19 @@ public class Player {
     public int getCurrent_Hp() {
         return current_Hp;
     }
+    public void add_Hp(int i){
+        if((getCurrent_Hp() + i) > getMax_Hp()){
+            current_Hp = max_Hp;
+            i = max_Hp - current_Hp;
+        }
+        else{
+            current_Hp = current_Hp + i;
+        }
+        System.out.println();
+        System.out.println(playerName + " HAS HEALED " + i + ("HP"));
+        System.out.println();
+    }
+
     public int getAtk() {
         return atk;
     }
@@ -64,6 +85,29 @@ public class Player {
     }
     public String getPlayerRace() {
         return playerRace;
+    }
+    public void addItems(Item item){
+        for(int i = 0; i < inventory.length; i++){
+            if(inventory[i] == null){
+                inventory[i] = item;
+                addMod(item);
+                break;
+            }
+        }
+    }
+
+    private void addMod(Item item){
+        switch(item.getName().toLowerCase()){
+            case "sword":
+                setAtk(item.getAmount());
+                break;
+            case "armor":
+                setDef(item.getAmount());
+                break;
+            case "boots":
+                setStm(item.getAmount());
+                break;
+        }
     }
 
     /**
@@ -84,6 +128,10 @@ public class Player {
      * Set the maximum health of the player.
      * @param max_Hp Max hp value added/decreased by.
      */
+
+    public void setName(String s){
+        this.playerName = s;
+    }
     public void setMax_Hp(int max_Hp) {
         this.max_Hp += max_Hp;
     }
@@ -212,6 +260,23 @@ public class Player {
         }
     }
 
+    public void usePotion(){
+        for(int i = 0; i < inventory.length; i++){
+            if(inventory[i]==null){
+                continue;
+            }
+            else{
+                if(inventory[i].getName()=="Potion"){   
+                    add_Hp(inventory[i].getAmount());
+                    inventory[i] = null;
+                    break;
+                }
+            }    
+        }
+        System.out.println("YOU HAVE NO POTIONS!");
+        System.out.println();
+    }
+
     /**
      * Display the player's statistics.
      * @param player The player whose stats are to be displayed.
@@ -228,6 +293,23 @@ public class Player {
         System.out.println("Magic Attack: " + this.getmAtk());
         System.out.println("Is Alive: " + this.isAlive());
         System.out.println("-----------------------------");
+    }
+
+    public void printInventory(){
+        System.out.println();
+        for(int a = 0; a<inventory.length;a++){
+            if(inventory[a]!=null){
+                if(inventory[a].getName() == "Potion"){
+                    System.out.print(inventory[a].getName() + ": ");
+                    System.out.println();
+                }else{
+                    System.out.print(inventory[a].getName() + ": ");
+                    System.out.print(inventory[a].getAmount() + " ");
+                    System.out.print(inventory[a].getMod() + "");
+                    System.out.println();
+                }
+            }
+        }
     }
 
     //test
