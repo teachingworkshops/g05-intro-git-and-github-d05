@@ -87,7 +87,7 @@ public class Room {
                         System.out.println("PRISONER: \n ...\n");
                     }
                     break;
-                    case("no"):
+                    case("n"):
                     break;
 
                     default:
@@ -97,11 +97,31 @@ public class Room {
         }
         else if(usedRoom == false && currentRoomName == "Empty Room"){
             usedRoom = true;
+            //Chance to find a lore note
+            int rand = r.nextInt(100);
+            if(rand < 50) {
+                System.out.println("YOU HAVE FOUND A NOTE. READ IT? (Y/N)");
+                switch((input.next()).toLowerCase()) {
+                    case("y"):
+                        int rand2 = r.nextInt(100);
+                        if(rand2 < 35) {
+                            System.out.printf("\"We've been wandering in circles for days.%nEvery time we reach the bounds of the dungeon, we're forced out by a horrible monster.%nWe've yet to find another way out. I pray that beast isn't protecting the only exit.\"%n");
+                        } else if (rand2 < 70) {
+                            System.out.printf("\"To Warden Daedron,%nWe must evacuate posthaste. The encroaching monsters and undead armies make further residence here impossible.%nWhile it is a shame we will not be able to further... *interrogate* the newest prisoners we've brought in,%nwe'll at least be able to harvest their materials for the empire once the monsters clear out.%nYours,%nChancellor Markos\"%n");
+                        } else {
+                            System.out.printf("*The text is rendered illegible by damage and age.%nYou're only able to make out something about a \"necromancer\" and a \"time loop\"%n.");
+                        }
+                    case("n"):
+                        break;
+                    default:
+                        System.out.println("INVALID INPUT, YOU'VE IGNORED THE NOTE!");
+                }
+            }
+            } else{
+                System.out.println("You have already looked in this room");
+            }
         }
-        else{
-            System.out.println("You have already looked in this room");
-        }
-    }
+    
 
     private void createRoom(){
         randomRoomNum = r.nextInt(100);

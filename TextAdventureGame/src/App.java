@@ -31,7 +31,7 @@ public class App {
         Player four = new Player( names[ 3 ] ) ;
 
         Player[] players = {one, two, three, four};
-
+        
         for(int i = 0; i < players.length; i++)
         {
             if ( !(players[ i ].getName() == null) )
@@ -48,6 +48,7 @@ public class App {
                 
             }
         }
+        System.out.printf("You awake, head pounding, in a dimly lit prison cell.%nThe door has been torn off of its hinges, and your equipment lies neatly outside.%nAFter gathering your gear, you try to remember how you got here, and are met with hazy memories of an ambush.%nNo sign of your captors. Might as well start trying to find a way out.%n");
         Game g = new Game(players);
         while(players[0].isAlive() || players[1].isAlive() || players[2].isAlive() || players[3].isAlive() ){ //if at least one player is alive
             for(int j = 0; j%3 < players.length; j++){  //loop through all the players
