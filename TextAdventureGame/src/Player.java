@@ -246,17 +246,20 @@ public class Player {
      * @param amount damage value taken
      */ 
     public void attack() {
-        System.out.println(playerName + " attacks for " + atk + " damage!");
+        System.out.println(playerName + " ATTACKS FOR " + atk + " DAMAGE!");
+        System.out.println();
     }
     //Plays text for hp 
     public void takeDamage(int amount) {
-        current_Hp -= amount;
+        current_Hp -= (amount-def);
         if (current_Hp <= 0) {
             current_Hp = 0;
             isAlive = false;
-            System.out.println(playerName + " has been defeated!");
+            System.out.println(playerName + " HAS BEEN DEFEATED!");
+            System.out.println();
         } else {
-            System.out.println(playerName + " has " + current_Hp + " health remaining.");
+            System.out.println(playerName + " HAS " + current_Hp + " HEALTH REMAINING");
+            System.out.println();
         }
     }
 
@@ -295,6 +298,16 @@ public class Player {
         System.out.println("-----------------------------");
     }
 
+    public void combatStats() {
+        System.out.println("Player Name: " + this.getName());
+        System.out.print("Max HP: " + this.getMax_Hp());
+        System.out.println("   Current HP: " + this.getCurrent_Hp());
+        System.out.print("Attack: " + this.getAtk());
+        System.out.println("   Defense: " + this.getDef());
+        System.out.print("Stamina: " + this.getStm());
+        System.out.println("   Magic Attack: " + this.getmAtk());
+        System.out.println("-----------------------------");
+    }
     public void printInventory(){
         System.out.println();
         for(int a = 0; a<inventory.length;a++){

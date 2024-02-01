@@ -10,6 +10,7 @@ public class Game {
     private int x;
     private int y;
     private Random r = new Random();
+    private int numPlayers = 0;
     
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
@@ -23,6 +24,7 @@ public class Game {
         for(int i = 0; i < p.length; i++){
             if ( !(p[ i ].getName() == null) ){
                 this.players[i] = p[i];
+                numPlayers++;
             }
             
         }
@@ -74,6 +76,12 @@ public class Game {
         mov = in.next();
         moveHelper(mov);
 
+    }
+
+    public void gameOver(){
+        clearScreen();
+        System.out.println("GAME OVER!!!");
+        System. exit(0);
     }
 
     public void moveHelper(String move){
@@ -154,10 +162,50 @@ public class Game {
     public void encounter(){
         clearScreen();
 
-        Enemy x = new Enemy( r.nextInt(15));
+        Enemy x = new Enemy( r.nextInt(14));
 
         System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
         x.displayEnemyStats();
+        System.out.println();
+
+        while(x.isAlive()){
+            String move = "";
+            Scanner input = new Scanner(System.in);
+            for(int i  = 0; i%numPlayers < players.length;i++){
+
+                players[i%numPlayers].combatStats();
+                System.out.println();
+                System.out.println("WHAT WOULD YOU LIKE TO DO?(ATTACK OR DRINK)");
+                move = input.next();
+
+                switch(move.toLowerCase()){
+                    case "attack":
+                    players[i%numPlayers].attack();
+                    x.takeDamage(players[i%numPlayers].getAtk() + players[i%numPlayers].getmAtk());
+                    break;
+                    case "drink":
+                    players[i%numPlayers].usePotion();
+                    break;
+                    default:
+                    System.out.println("INVALID INPUT, TRY AGAIN!");
+                    i--;
+                    continue;
+                }
+                if(!x.isAlive()){
+
+                    break;
+                }
+                x.attack();
+                players[i%numPlayers].takeDamage(x.atk);
+                if(players[i%numPlayers].getCurrent_Hp() == 0){
+                    players[i%numPlayers] = null;
+                }
+                if(players[0]==null &&players[1]==null &&players[2]==null &&players[3]==null ){
+                    gameOver();
+                }
+            }
+        }
+        
     }
 
     public static void clearScreen() {  

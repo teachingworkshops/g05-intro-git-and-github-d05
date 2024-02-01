@@ -1,7 +1,7 @@
 public class Enemy {
     private int max_Hp = 0;
     private int current_Hp = 0;
-    private int atk = 0;
+    public int atk = 0;
     private int def = 0;
 
     private String name= "";
@@ -143,7 +143,7 @@ public class Enemy {
      * Display attacks to console
      */
     public void attack() {
-        System.out.println(name + " attacks for " + atk + " damage!");
+        System.out.println(name + " ATTACKS FOR " + atk + " DAMAGE!");
     }
 
     /**
@@ -154,13 +154,13 @@ public class Enemy {
      * @param amount damage vale taken
      */
     public void takeDamage(int amount) {
-        current_Hp -= amount;
+        current_Hp -= (amount-def);
         if (current_Hp <= 0) {
             current_Hp = 0;
             isAlive = false;
-            System.out.println(name + " has been defeated!");
+            System.out.println(name + " HAS BEEN DEFEATED!");
         } else {
-            System.out.println(name + " has " + current_Hp + " health remaining.");
+            System.out.println(name + " has " + current_Hp + " HEALTH REMAINING.");
         }
     }
 
