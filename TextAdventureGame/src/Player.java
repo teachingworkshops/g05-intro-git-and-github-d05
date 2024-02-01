@@ -264,6 +264,7 @@ public class Player {
     }
 
     public void usePotion(){
+        int c = 0;
         for(int i = 0; i < inventory.length; i++){
             if(inventory[i]==null){
                 continue;
@@ -272,12 +273,16 @@ public class Player {
                 if(inventory[i].getName()=="Potion"){   
                     add_Hp(inventory[i].getAmount());
                     inventory[i] = null;
+                    c++;
                     break;
                 }
             }    
         }
-        System.out.println("YOU HAVE NO POTIONS!");
-        System.out.println();
+        if(c==0){
+            System.out.println("YOU HAVE NO POTIONS!");
+            System.out.println();
+        }
+        
     }
 
     /**

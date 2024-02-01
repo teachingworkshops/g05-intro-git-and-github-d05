@@ -166,28 +166,26 @@ public class Game {
     public void encounter(Room room){
         clearScreen();
 
-
-        Enemy y = new Enemy( r.nextInt(14));
-
-
         Enemy x;
         if(room.getRoom() == "Dungeon Door"){
-            int enem = r.nextInt(5) + 10;
+            int enem = (r.nextInt(4)) + 11;
             x = new Enemy( enem);
         }
         else{
-            x = new Enemy( r.nextInt(11));
+            x = new Enemy( r.nextInt(10));
         }
 
-        System.out.println("YOU HAVE RAN INTO A " + y.enemyName());
+        System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
         x.displayEnemyStats();
         System.out.println();
 
-        while(y.isAlive()){
+        while(x.isAlive()){
             String move = "";
             Scanner input = new Scanner(System.in);
             for(int i  = 0; i%numPlayers < players.length;i++){
-
+                if(!players[i%numPlayers].isAlive()){
+                    continue;
+                }
                 players[i%numPlayers].combatStats();
                 System.out.println();
                 System.out.println("WHAT WOULD YOU LIKE TO DO?(ATTACK OR DRINK)");
@@ -196,7 +194,7 @@ public class Game {
                 switch(move.toLowerCase()){
                     case "attack":
                     players[i%numPlayers].attack();
-                    y.takeDamage(players[i%numPlayers].getAtk() + players[i%numPlayers].getmAtk());
+                    x.takeDamage(players[i%numPlayers].getAtk() + players[i%numPlayers].getmAtk());
                     break;
                     case "drink":
                     players[i%numPlayers].usePotion();
@@ -206,11 +204,15 @@ public class Game {
                     i--;
                     continue;
                 }
-                if(!y.isAlive()){
-
+                if(!x.isAlive()){
+                    if(room.getRoom() == "Dungeon Door"){
+                        clearScreen();
+                        System.out.println("YOU WIN!");
+                        System.exit(0);
+                    }
                     break;
                 }
-                y.attack();
+                x.attack();
                 players[i%numPlayers].takeDamage(x.atk);
                 if(players[i%numPlayers].getCurrent_Hp() == 0){
                     players[i%numPlayers] = null;

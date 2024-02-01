@@ -118,7 +118,7 @@ public class Enemy {
                 this.atk = 20;
                 this.def = 10;
                 break;
-            case 0:
+            case 15:
                 this.name = "Cyclops";
                 this.max_Hp = 60;
                 this.current_Hp = 60;
