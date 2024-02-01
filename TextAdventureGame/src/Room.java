@@ -148,6 +148,5 @@ public class Room {
         hasEnemy = true;
         this.roomName = "Dungeon Door";
         this.currentRoomName = "Dungeon Door";
-        System.out.println("Boss created");
     }
 }
