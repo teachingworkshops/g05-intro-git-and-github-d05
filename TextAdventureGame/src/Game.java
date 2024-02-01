@@ -179,7 +179,7 @@ public class Game {
             x = new Enemy( r.nextInt(11));
         }
 
-        System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
+        System.out.println("YOU HAVE RAN INTO A " + y.enemyName());
         x.displayEnemyStats();
         System.out.println();
 
