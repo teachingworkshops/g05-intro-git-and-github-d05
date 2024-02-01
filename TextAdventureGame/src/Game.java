@@ -172,7 +172,7 @@ public class Game {
             x = new Enemy( enem);
         }
         else{
-            x = new Enemy( r.nextInt(10));
+            x = new Enemy( r.nextInt(9) + 1);
         }
 
         System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
