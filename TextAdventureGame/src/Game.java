@@ -25,10 +25,21 @@ public class Game {
         this.coords[col/2][rows/2] = "W";
         this.x = col/2;
         this.y = rows/2;
+        int xBoss = r.nextInt(2);
+        int yBoss = r.nextInt(2);
 
         for (int i = 0; i<rows; i++){
             for (int j = 0; j<col; j++){
-               this.roomMap[i][j] = new Room();
+                if(yBoss == 1)
+                    yBoss = 6;
+                if(xBoss == 1)
+                    xBoss = 6;
+                if(i == xBoss && j == yBoss){
+                    this.roomMap[i][j] = new Room("Boss");
+                }
+                else{
+                this.roomMap[i][j] = new Room();
+                }
             }
         }        
     }
@@ -81,7 +92,7 @@ public class Game {
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                     if(roomMap[x][y].hasEnemy){
-                        encounter();
+                        encounter(roomMap[x][y]);
                     }
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -96,7 +107,7 @@ public class Game {
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                     if(roomMap[x][y].hasEnemy){
-                        encounter();
+                        encounter(roomMap[x][y]);
                     }
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -111,7 +122,7 @@ public class Game {
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                     if(roomMap[x][y].hasEnemy){
-                        encounter();
+                        encounter(roomMap[x][y]);
                     }
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN");
@@ -126,7 +137,7 @@ public class Game {
                     System.out.println("Entering: " + roomMap[x][y].getRoom());
                     printMap();
                     if(roomMap[x][y].hasEnemy){
-                        encounter();
+                        encounter(roomMap[x][y]);
                     }
                 }else{
                     System.out.println("OUT OF BOUNDS! TRY AGAIN" );
@@ -143,11 +154,16 @@ public class Game {
         roomMap[x][y].look(p);
     }
 
-    public void encounter(){
+    public void encounter(Room room){
         clearScreen();
-
-        Enemy x = new Enemy( r.nextInt(15));
-
+        Enemy x;
+        if(room.getRoom() == "Dungeon Door"){
+            int enem = r.nextInt(5) + 10;
+            x = new Enemy( enem);
+        }
+        else{
+            x = new Enemy( r.nextInt(11));
+        }
         System.out.println("YOU HAVE RAN INTO A " + x.enemyName());
         x.displayEnemyStats();
     }
