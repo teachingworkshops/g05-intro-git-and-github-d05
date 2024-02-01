@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class App {
 
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_WHITE = "\u001B[37m";
     public static void main(String[] args) throws Exception {
 
         int numOfPlayers = 0;
@@ -13,12 +11,11 @@ public class App {
         Scanner input = new Scanner( System.in ) ;
         while ( numOfPlayers < 1 || numOfPlayers > 4 )
             {
-            System.out.print( "HOW MANY PLAYERS("+ ANSI_RED +"1-4 PLAYERS"+ANSI_WHITE+"): " ) ;
-
+            System.out.print( "HOW MANY PLAYERS(1-4 PLAYERS): " ) ;
             numOfPlayers = input.nextInt() ;
             if ( numOfPlayers > 4 || numOfPlayers < 1 )
                 {
-                System.out.println( "INVALID NUMBER OF PLAYERS("+ANSI_RED+"1-4 PLAYERS ALLOWED!"+ANSI_WHITE+")" ) ;
+                System.out.println( "INVALID NUMBER OF PLAYERS(1-4 PLAYERS ALLOWED!)" ) ;
                 }
             }
         
@@ -40,10 +37,10 @@ public class App {
             if ( !(players[ i ].getName() == null) )
             {
                 players[i].displayPlayerStats();
-                System.out.println("CHOOSE A CLASS("+ANSI_RED+"FIGHTER, WIZARD, BARBARIAN"+ANSI_WHITE+"): ");
+                System.out.println("CHOOSE A CLASS(FIGHTER, WIZARD, BARBARIAN): ");
                 // Set player class to "wizard" and race to "elf"
                 players[i].setClass(input.next());
-                System.out.println("CHOOSE A RACE("+ANSI_RED+"ELF, DWARF, ORC"+ANSI_WHITE+"): ");
+                System.out.println("CHOOSE A RACE(ELF, DWARF, ORC): ");
                 players[i].setPlayerRace(input.next());
                 players[i].displayPlayerStats();
                 System.out.println();
@@ -66,7 +63,7 @@ public class App {
 
                 int x = 0;
                 do{
-                    System.out.println("WHAT WOULD YOU LIKE TO DO ("+ANSI_RED+"MOVE, STATS, STORAGE, DRINK, MAP, OR LOOK"+ANSI_WHITE+"): ");
+                    System.out.println("WHAT WOULD YOU LIKE TO DO (MOVE, STATS, STORAGE, DRINK, MAP, OR LOOK): ");
                     String in = input.next();
                     switch(in.toLowerCase()){
                         case "move":

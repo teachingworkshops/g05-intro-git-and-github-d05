@@ -17,6 +17,10 @@ public class Room {
         createRoom();
     }
 
+    public Room(String boss){
+        createBoss();
+    }
+
     public String getRoom(){
         return this.currentRoomName;
     }
@@ -118,5 +122,12 @@ public class Room {
         else if(randomRoomNum < 100){
             this.roomName = "Empty Room"; //when using the look command in this room, nothing will happen.
         }
+    }
+
+    private void createBoss(){
+        hasEnemy = true;
+        this.roomName = "Dungeon Door";
+        this.currentRoomName = "Dungeon Door";
+        System.out.println("Boss created");
     }
 }
