@@ -48,8 +48,9 @@ public class App {
                 
             }
         }
-        System.out.printf("You awake, head pounding, in a dimly lit prison cell.%nThe door has been torn off of its hinges, and your equipment lies neatly outside.%nAFter gathering your gear, you try to remember how you got here, and are met with hazy memories of an ambush.%nNo sign of your captors. Might as well start trying to find a way out.%n");
+        System.out.printf("You awake, head pounding, in a dimly lit prison cell.%nThe door has been torn off of its hinges, and your equipment lies neatly outside.%nAFter gathering your gear, you try to remember how you got here, and are met with hazy memories of an ambush.%nNo sign of your captors. Might as well start trying to find a way out.%n\n");
         Game g = new Game(players);
+        g.printMap();
         while(players[0].isAlive() || players[1].isAlive() || players[2].isAlive() || players[3].isAlive() ){ //if at least one player is alive
             for(int j = 0; j%3 < players.length; j++){  //loop through all the players
                 if ( !players[ j%3 ].isAlive() ){   //if the player isnt alive, change their name
@@ -61,7 +62,6 @@ public class App {
                 System.out.println();
                 System.out.println("-----------------------------");
                 System.out.println( (players[ j%3 ].getName()).toUpperCase());
-
                 int x = 0;
                 do{
                     System.out.println("WHAT WOULD YOU LIKE TO DO (MOVE, STATS, STORAGE, DRINK, MAP, OR LOOK): ");
